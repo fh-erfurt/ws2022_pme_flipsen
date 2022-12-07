@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  release:
+    types: [ published ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build apk
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Build the app
+        run: ./gradlew build
