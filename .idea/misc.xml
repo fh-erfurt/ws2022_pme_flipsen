@@ -5,6 +5,17 @@
       <map>
         <entry key="..\:/Users/tobik/AndroidStudioProjects/Flipsen/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/tobik/AndroidStudioProjects/Flipsen/app/src/main/res/layout/fragment_dashboard.xml" value="0.47554347826086957" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.59375" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.59375" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/drawable/ic_launcher_background.xml" value="0.59375" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/activity_main.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_generator.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_home.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_notifications.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_settings.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/layout/fragment_vault.xml" value="0.5181159420289855" />
+        <entry key="..\:/Users/tobik/AndroidStudioProjects/ws2022_pme_flipsen/app/src/main/res/menu/bottom_nav_menu.xml" value="0.5776041666666667" />
       </map>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package de.fhe.ai.flipsen
+package de.fhe.ai.flipsen.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,14 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_vault, R.id.navigation_generator, R.id.navigation_settings
+        ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
