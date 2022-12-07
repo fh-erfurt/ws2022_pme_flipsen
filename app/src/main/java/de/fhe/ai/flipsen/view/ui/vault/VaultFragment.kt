@@ -16,11 +16,7 @@ class VaultFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vaultViewModel = ViewModelProvider(this)[VaultViewModel::class.java]
 
         _binding = FragmentVaultBinding.inflate(inflater, container, false)
