@@ -4,4 +4,8 @@
     <string name="title_generator">Generator</string>
     <string name="title_settings">Einstellungen</string>
     <string name="profile">Profil</string>
+    <string name="welcome">Willkommen</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="login">Login</string>
 </resources>
