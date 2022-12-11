@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_view_Login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Wilkommen!"
-            android:lines="1"
-            android:textSize="35dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
             android:textAlignment="center"
-            />
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/edit_text_Username"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_Username"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Benutzername"
-            android:focusable="true"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white"
-            />
+            android:textColorHint="@color/primary_800"
+            app:boxBackgroundColor="@color/cardview_light_background">
 
-        <EditText
-            android:id="@+id/edit_text_Password"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_Password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Passwort"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white"
-            />
+            android:textColorHint="@color/primary_800"
+            app:boxBackgroundColor="@color/cardview_light_background"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/neutral_500">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/button_Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textColor="@color/white"
             android:layout_gravity="center"
-            />
+            android:text="Login"
+            android:textColor="@color/white" />
 
     </LinearLayout>
-
 
 </RelativeLayout>
