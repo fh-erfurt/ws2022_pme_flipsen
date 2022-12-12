@@ -9,6 +9,9 @@
     <color name="neutral_500">#292940</color>
     <color name="neutral_200">#666687</color>
 
+    <color name="settings_secondary_color">#FFFFFF</color>
+    <color name="night_mode">#FFFFFF</color>
+
     <color name="mtrl_textinput_default_box_stroke_color">#666687</color>
 
 </resources>
