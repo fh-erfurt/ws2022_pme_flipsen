@@ -1,5 +1,6 @@
 package de.fhe.ai.flipsen.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.ActivityMainBinding
 
@@ -34,6 +36,12 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val btnAddEntryActivity = findViewById<FloatingActionButton>(R.id.btnAddEntryActivity)
+        btnAddEntryActivity.setOnClickListener {
+            val intent = Intent(this, EditEntryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
