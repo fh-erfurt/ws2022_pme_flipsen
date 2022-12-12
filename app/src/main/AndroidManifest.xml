@@ -9,23 +9,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Flipsen">
+
         <activity
-            android:name=".view.ui.login.LoginActivity"
-            android:exported="true">
+            android:name=".view.EditEntryActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+
+        <activity
+            android:name=".view.ui.login.LoginActivity"
+            android:exported="true">
+            <meta-data android:name="android.app.lib_name" android:value="" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
-
         </activity>
     </application>
 
