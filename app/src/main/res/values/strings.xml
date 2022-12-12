@@ -8,4 +8,6 @@
     <string name="username">Benutzername</string>
     <string name="password">Passwort</string>
     <string name="login">Login</string>
+    <string name="forgotten_password">Passwort vergessen?</string>
+    <string name="link_forgotten_password">Hier klicken.</string>
 </resources>
