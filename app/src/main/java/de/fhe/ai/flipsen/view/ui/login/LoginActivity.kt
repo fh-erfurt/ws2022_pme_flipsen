@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.view.MainActivity
 
+
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
