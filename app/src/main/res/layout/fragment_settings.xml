@@ -42,16 +42,17 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/account_cog"/>
+                android:layout_marginTop="0dp"
+                android:src="@drawable/account_cog"
+                app:tint="#808080"/>
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Email(Account)"
+                android:layout_marginTop="0dp"
+                android:text="@string/profile"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -78,14 +79,15 @@
                         android:layout_height="40dp"
                         android:src="@drawable/account_cowboy_hat"
                         android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"/>
+                        android:padding="12sp"
+                        app:tint="#808080"/>
 
                     <TextView
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:text="Email ändern"
+                        android:text="@string/change_email"
                         android:textSize="16sp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -122,14 +124,15 @@
                         android:layout_height="40dp"
                         android:src="@drawable/ic_baseline_lock_24"
                         android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"/>
+                        android:padding="12sp"
+                        app:tint="#808080"/>
 
                     <TextView
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:text="Passwort ändern"
+                        android:text="@string/change_password"
                         android:textSize="16sp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -166,14 +169,15 @@
                         android:layout_height="40dp"
                         android:src="@drawable/account_switch"
                         android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"/>
+                        android:padding="12sp"
+                        app:tint="#808080"/>
 
                     <TextView
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:text="Benutzer wechseln"
+                        android:text="@string/change_user"
                         android:textSize="16sp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -185,6 +189,52 @@
                         android:src="@drawable/settings_right_arrow_icon"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Account löschen-->
+            <LinearLayout
+                android:background="@drawable/round_rectangle_for_bars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/settingsDeleteAccount"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/delete_sweep"
+                        android:background="@drawable/round_rectangle_background_white"
+                        android:padding="12sp"
+                        app:tint="#808080"/>
+
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:text="@string/delete_account"
+                        android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@id/settingsDeleteAccount"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/settings_right_arrow_icon"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        app:tint="#808080"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -205,23 +255,24 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/logoutIcon"
+                        android:id="@+id/settingsLogoutIcon"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/logout_variant"
                         android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"/>
+                        android:padding="12sp"
+                        app:tint="#808080"/>
 
                     <TextView
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         android:textSize="16sp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
-                        android:layout_toEndOf="@id/logoutIcon"/>
+                        android:layout_toEndOf="@id/settingsLogoutIcon"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
