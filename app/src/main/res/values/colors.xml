@@ -8,4 +8,8 @@
     <color name="neutral_800">#212134</color>
     <color name="neutral_500">#292940</color>
     <color name="neutral_200">#666687</color>
+
+    <color name="settings_secondary_color">#FFFFFF</color>
+    <color name="night_mode">#FFFFFF</color>
+
 </resources>
