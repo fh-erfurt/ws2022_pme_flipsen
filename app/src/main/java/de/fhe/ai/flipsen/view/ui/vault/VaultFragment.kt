@@ -1,35 +1,38 @@
 package de.fhe.ai.flipsen.view.ui.vault
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.FragmentVaultBinding
+import de.fhe.ai.flipsen.model.PasswordEntry
 
-class VaultFragment : Fragment() {
+@AndroidEntryPoint
+class VaultFragment : Fragment(R.layout.fragment_vault) {
 
-    private lateinit var vaultViewModel: VaultViewModel
-    private var _binding: FragmentVaultBinding? = null
+    private val vaultViewModel: VaultViewModel by viewModels()
 
-    private val binding get() = _binding!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        vaultViewModel = ViewModelProvider(this)[VaultViewModel::class.java]
+        val binding = FragmentVaultBinding.bind(view)
 
-        _binding = FragmentVaultBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val passwordEntryAdapter = PasswordEntryAdapter()
 
-        val textView: TextView = binding.textVault
-        vaultViewModel.text.observe(viewLifecycleOwner, { textView.text = it })
+        binding.apply {
+            rvEntries.apply {
+                adapter = passwordEntryAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+            }
+        }
 
-        return root
+        vaultViewModel.passwordEntryList.observe(viewLifecycleOwner) {
+            passwordEntryAdapter.submitList(it)
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
