@@ -25,8 +25,8 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
     class PasswordEntryViewHolder(private val binding: ItemPasswordEntryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(passwordEntry: PasswordEntry) {
             binding.apply {
-                Picasso.get().load("https://unfair-white-tarantula.faviconkit.com/" + passwordEntry.URL + "/32").placeholder(R.drawable.delete_sweep)
-                    .error(R.drawable.delete_sweep)
+                Picasso.get().load("https://unfair-white-tarantula.faviconkit.com/" + passwordEntry.URL + "/32").placeholder(R.drawable.ic_baseline_autorenew_24)
+                    .error(R.drawable.ic_baseline_autorenew_24)
                     .into(icon)
                 name.text = passwordEntry.name
                 username.text = passwordEntry.username

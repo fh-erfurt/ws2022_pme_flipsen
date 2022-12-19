@@ -30,11 +30,6 @@ class EditEntryActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = "Eintrag bearbeiten"
 
-        imageView = findViewById(R.id.imageView)
-        Picasso.get().load("https://unfair-white-tarantula.faviconkit.com/netflix.com/32").placeholder(R.drawable.delete_sweep)
-            .error(R.drawable.delete_sweep)
-            .into(imageView)
-
         //val btnSave = findViewById<Button>(R.id.btnSave)
         //btnSave.setOnClickListener {
         //    writeData()
