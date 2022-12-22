@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
@@ -33,6 +34,8 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
         vaultViewModel.passwordEntryList.observe(viewLifecycleOwner) {
             passwordEntryAdapter.submitList(it)
         }
+
+        //TODO("Bug: List is not visible on first start, reloading the fragment resolves the issue")
     }
 
 }

@@ -2,6 +2,7 @@ package de.fhe.ai.flipsen.view.ui.vault
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,9 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
                     .into(icon)
                 name.text = passwordEntry.name
                 username.text = passwordEntry.username
+                btnMore.setImageResource(R.drawable.ic_baseline_more_horiz_24)
+
+                //TODO("Set itemClickListener with dropdown menu to delete, set group, rename (see: https://stackoverflow.com/questions/29424944/recyclerview-itemclicklistener-in-kotlin)")
             }
         }
     }

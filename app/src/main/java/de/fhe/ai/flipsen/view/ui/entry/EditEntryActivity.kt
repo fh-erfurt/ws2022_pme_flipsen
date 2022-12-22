@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.database.local.PasswordDatabase
+import de.fhe.ai.flipsen.databinding.ActivityEditEntryBinding
 import de.fhe.ai.flipsen.model.PasswordEntry
 import de.fhe.ai.flipsen.view.MainActivity
 import kotlinx.android.synthetic.main.activity_edit_entry.*
@@ -17,23 +21,46 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class EditEntryActivity : AppCompatActivity() {
 
-    private lateinit var imageView: ImageView
+    private val viewModel : EditEntryViewModel by viewModels()
+    private lateinit var binding: ActivityEditEntryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityEditEntryBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_edit_entry)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.neutral_500)
-
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = "Eintrag bearbeiten"
 
-        //val btnSave = findViewById<Button>(R.id.btnSave)
-        //btnSave.setOnClickListener {
-        //    writeData()
-        //}
+        binding.apply {
+            inputName.setText(viewModel.passwordEntryName)
+            inputUsername.setText(viewModel.passwordEntryUsername)
+            inputPassword.setText(viewModel.passwordEntryPassword)
+            inputURL.setText(viewModel.passwordEntryURL)
+
+            // Group & Account
+
+            inputName.addTextChangedListener {
+                viewModel.passwordEntryName = it.toString()
+            }
+
+            inputUsername.addTextChangedListener {
+                viewModel.passwordEntryUsername = it.toString()
+            }
+
+            inputPassword.addTextChangedListener {
+                viewModel.passwordEntryPassword = it.toString()
+            }
+
+            inputURL.addTextChangedListener {
+                viewModel.passwordEntryURL = it.toString()
+            }
+        }
 
     }
 
@@ -41,22 +68,5 @@ class EditEntryActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.edit_entry_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
-    //private fun writeData() {
-    //    val name        = inputName.text.toString()
-    //    val username    = inputUsername.text.toString()
-    //    val password    = inputPassword.text.toString()
-    //    val URL         = inputURL.text.toString()
-    //    val folder      = inputFolder.text.toString()
-    //    val notes       = inputNotes.text.toString()
-    //
-    //    if (name.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()) {
-    //        val passwordEntry = PasswordEntry(
-    //            name, username, password, URL
-    //        )
-    //
-    //    }
-    //
-    //}
 
 }
