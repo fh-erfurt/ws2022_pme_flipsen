@@ -1,6 +1,5 @@
 package de.fhe.ai.flipsen.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,20 +7,20 @@ import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.ActivityMainBinding
-import de.fhe.ai.flipsen.view.ui.entry.EditEntryActivity
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +30,18 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.neutral_500)
 
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_vault, R.id.navigation_generator, R.id.navigation_settings
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
 
-        val btnAddEntryActivity = findViewById<FloatingActionButton>(R.id.btnAddEntryActivity)
-        btnAddEntryActivity.setOnClickListener {
-            val intent = Intent(this, EditEntryActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,7 +50,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, "Not implemented yet...", Toast.LENGTH_LONG).show()
+        when (item.itemId) {
+            R.id.search -> {
+                Toast.makeText(this, "Not implemented yet...", Toast.LENGTH_LONG).show()
+                return true
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 }

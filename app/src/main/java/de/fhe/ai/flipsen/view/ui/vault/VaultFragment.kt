@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.FragmentVaultBinding
-import de.fhe.ai.flipsen.model.PasswordEntry
+import kotlinx.android.synthetic.main.fragment_vault.*
 
 @AndroidEntryPoint
 class VaultFragment : Fragment(R.layout.fragment_vault) {
@@ -33,6 +33,13 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
 
         vaultViewModel.passwordEntryList.observe(viewLifecycleOwner) {
             passwordEntryAdapter.submitList(it)
+        }
+
+
+        val navController = findNavController()
+
+        btnEditEntryFragment.setOnClickListener {
+            navController.navigate(R.id.navigation_edit_entry)
         }
 
         //TODO("Bug: List is not visible on first start, reloading the fragment resolves the issue")

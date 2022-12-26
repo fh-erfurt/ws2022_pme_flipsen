@@ -17,12 +17,12 @@
     <string name="change_user">Benutzer wechseln</string>
     <string name="delete_account">Account löschen</string>
     <string name="logout">Logout.</string>
-        <!-- settings mail -->
+    <!-- settings mail -->
     <string name="current_email">Aktuelle Email</string>
     <string name="new_email">Neue Email</string>
     <string name="new_email_confirm">Neue Email Bestätigen</string>
     <string name="btn_confirm">Bestätigen</string>
-        <!-- settings password -->
+    <!-- settings password -->
     <string name="current_password">Aktuelles Passwort</string>
     <string name="new_password">Neues Passwort</string>
     <string name="new_password_confirm">Neues Passwort bestätigen</string>

@@ -21,4 +21,5 @@ class VaultViewModel @ViewModelInject constructor(
     }
 
     val text: LiveData<String> = _text
+
 }
