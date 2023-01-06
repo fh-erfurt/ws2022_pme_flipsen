@@ -9,8 +9,8 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "account")
 data class Account(
     @NonNull
-    @ColumnInfo(name = "username")
-    var username: String = "",
+    @ColumnInfo(name = "accountname")
+    var accountname: String = "",
 
     @NonNull
     @ColumnInfo(name = "master_password")
