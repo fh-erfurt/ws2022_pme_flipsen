@@ -11,10 +11,10 @@ import java.security.PrivateKey
 import javax.inject.Inject
 
 class VaultViewModel @ViewModelInject constructor(
-    private val passwordDao: PasswordDao
+    private val passwordDao: PasswordDao //TODO("Use repository instead of dao")
 ): ViewModel() {
 
-    val passwordEntryList = passwordDao.getPasswords(0).asLiveData()
+    val passwordEntryList = passwordDao.getPasswords(0).asLiveData() //TODO("Implement getAccountId function")
 
     private val _text = MutableLiveData<String>().apply {
         value = "Tresor"
