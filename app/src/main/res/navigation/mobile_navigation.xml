@@ -9,7 +9,11 @@
         android:id="@+id/navigation_vault"
         android:name="de.fhe.ai.flipsen.view.ui.vault.VaultFragment"
         android:label="@string/title_vault"
-        tools:layout="@layout/fragment_vault" />
+        tools:layout="@layout/fragment_vault" >
+        <action
+            android:id="@+id/action_navigation_vault_to_navigation_edit_entry"
+            app:destination="@id/navigation_edit_entry" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_generator"
@@ -22,4 +26,11 @@
         android:name="de.fhe.ai.flipsen.view.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_edit_entry"
+        android:name="de.fhe.ai.flipsen.view.ui.entry.EditEntryFragment"
+        android:label="Eintrag bearbeiten"
+        tools:layout="@layout/fragment_edit_entry" />
+
 </navigation>

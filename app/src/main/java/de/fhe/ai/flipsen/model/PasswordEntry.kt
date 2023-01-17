@@ -16,8 +16,16 @@ data class PasswordEntry(
     var name: String = "",
 
     @NonNull
+    @ColumnInfo(name = "username")
+    var username: String = "",
+
+    @NonNull
     @ColumnInfo(name = "password")
     var password: String = "",
+
+    @NonNull
+    @ColumnInfo(name = "URL")
+    var URL: String = "",
 
     @NonNull
     @ColumnInfo(name = "group_id")

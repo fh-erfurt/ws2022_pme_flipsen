@@ -4,56 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.EditEntryActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/neutral_500"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Abbrechen"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="28px"
-        app:layout_constraintEnd_toStartOf="@+id/textEditEntry"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textEditEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Eintrag bearbeiten"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Speichern"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="28px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textEditEntry"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".view.ui.entry.EditEntryFragment">
 
     <TextView
         android:id="@+id/textInformation"
@@ -64,11 +15,11 @@
         android:text="Eintrags-Informationen"
         android:textColor="@color/primary_500"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputName"
+        android:id="@+id/inputLayoutName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -79,13 +30,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textInformation">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputUsername"
+        android:id="@+id/inputLayoutUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -93,16 +45,17 @@
         android:textColorHint="@color/neutral_200"
         app:boxStrokeColor="@color/neutral_200"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputName">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutName">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputPassword"
+        android:id="@+id/inputLayoutPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -110,16 +63,17 @@
         android:textColorHint="@color/neutral_200"
         app:boxStrokeColor="@color/neutral_200"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUsername">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutUsername">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputURL"
+        android:id="@+id/inputLayoutURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -127,9 +81,10 @@
         android:textColorHint="@color/neutral_200"
         app:boxStrokeColor="@color/neutral_200"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutPassword">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -143,11 +98,11 @@
         android:text="Sonstiges"
         android:textColor="@color/primary_500"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputURL" />
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutURL" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputFolder"
+        android:id="@+id/inputLayoutFolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -158,13 +113,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textOther">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputFolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/inputNotes"
+        android:id="@+id/inputLayoutNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32px"
@@ -172,9 +128,10 @@
         android:textColorHint="@color/neutral_200"
         app:boxStrokeColor="@color/neutral_200"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFolder">
+        app:layout_constraintTop_toBottomOf="@+id/inputLayoutFolder">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>

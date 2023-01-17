@@ -1,8 +1,6 @@
 package de.fhe.ai.flipsen.database.local
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import de.fhe.ai.flipsen.dependency_injection.ApplicationScope
 import de.fhe.ai.flipsen.model.Account
@@ -13,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
-@Database(entities = [PasswordEntry::class, Account::class, PasswordGroup::class], version = 2)
+@Database(entities = [PasswordEntry::class, Account::class, PasswordGroup::class], version = 1)
 abstract class PasswordDatabase : RoomDatabase() {
 
     abstract fun passwordDao(): PasswordDao
@@ -26,12 +24,12 @@ abstract class PasswordDatabase : RoomDatabase() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
 
-            val dao = database.get().passwordDao()
+            val pDao = database.get().passwordDao()
 
             applicationScope.launch {
-                dao.insert(PasswordEntry("Google", "Test1234"))
-                dao.insert(PasswordEntry("Email", "Password"))
-                dao.insert(PasswordEntry("Discord", "HelloWorld42"))
+                pDao.insert(PasswordEntry("Netflix", "maxmustermann@test.de", "123", "netflix.com", 0, 0))
+                pDao.insert(PasswordEntry("Google", "stevejobs@test.de", "ISJDD3jJFi", "google.com", 0, 0))
+                pDao.insert(PasswordEntry("YouTube", "michaeljackson@test.com", "9jJo4jNi259dmfdjDde", "youtube.com", 0, 0))
             }
         }
     }
