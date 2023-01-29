@@ -1,7 +1,6 @@
 package de.fhe.ai.flipsen.view.ui.entry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -13,13 +12,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
-import androidx.navigation.fragment.findNavController
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.Snackbar
 import de.fhe.ai.flipsen.databinding.FragmentEditEntryBinding
-import de.fhe.ai.flipsen.view.util.exhaustive
+import de.fhe.ai.flipsen.model.PasswordEntry
+import de.fhe.ai.flipsen.view.util.parcelable
 
 @AndroidEntryPoint
 class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
@@ -27,6 +27,15 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
     private val viewModel : EditEntryViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val entry = arguments?.parcelable<PasswordEntry>("entry")
+        if (entry != null) {
+            viewModel.passwordEntry = entry
+            viewModel.passwordEntryName = entry.name
+            viewModel.passwordEntryURL = entry.URL
+            viewModel.passwordEntryPassword = entry.password
+            viewModel.passwordEntryUsername = entry.username
+        }
+
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -53,8 +62,6 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
             inputPassword.setText(viewModel.passwordEntryPassword)
             inputURL.setText(viewModel.passwordEntryURL)
 
-            // Group & Account
-
             inputName.addTextChangedListener {
                 viewModel.passwordEntryName = it.toString()
             }
@@ -76,8 +83,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
             viewModel.editEntryEvent.collect { event ->
                 when (event) {
                     is EditEntryViewModel.EditEntryEvent.ShowInvalidInputMessage -> {
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
-                                .show()
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
                     }
                     is EditEntryViewModel.EditEntryEvent.NavigateBackWithResult -> {
                         binding.inputName.clearFocus()
@@ -87,8 +93,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
                         )
                         findNavController().popBackStack()
                     }
-                    else -> {}
-                }.exhaustive
+                }
             }
         }
     }

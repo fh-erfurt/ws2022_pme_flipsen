@@ -4,8 +4,6 @@ import androidx.room.*
 import de.fhe.ai.flipsen.model.PasswordEntry
 import de.fhe.ai.flipsen.model.PasswordGroup
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 
 @Dao
 interface PasswordDao {

@@ -26,4 +26,23 @@
     <string name="current_password">Aktuelles Passwort</string>
     <string name="new_password">Neues Passwort</string>
     <string name="new_password_confirm">Neues Passwort bestätigen</string>
+
+    <!-- password entry -->
+    <string name="image_button_description">Editieren des Passworteintrags</string>
+    <string name="favicon_description">Favicon der eingestellten Website</string>
+    <!-- vault fragment -->
+    <string name="folder">Ordner</string>
+    <string name="unsorted">Unsortiert</string>
+    <string name="vault_action_button">Neuen Passworteintrag erstellen</string>
+    <string name="save">Speichern</string>
+    <string name="back_btn_description">Zurück zur Profilseite</string>
+    <string name="entry_information">Eintrags-Informationen</string>
+    <string name="name">Name</string>
+    <string name="notes">Notizen</string>
+    <string name="other">Sonstiges</string>
+    <string name="url">URL</string>
+
+    <string name="action_delete">Löschen</string>
+    <string name="action_move">Verschieben</string>
+
 </resources>

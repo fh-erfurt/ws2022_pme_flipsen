@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/text_view_welcome"
@@ -31,7 +32,6 @@
             android:hint="@string/username"
             android:textColorHint="@color/primary_800"
             app:boxBackgroundColor="@color/neutral_500">
-            <!--kann ich auf den spezifischen style file zugreifen weil mir die farbauswahl nicht ganz gefällt?-->
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_username"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/link_forgotten_password"
                 android:textColor="@color/primary_800"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
 
