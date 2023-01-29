@@ -16,14 +16,14 @@ class GeneratorFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         generatorViewModel = ViewModelProvider(this)[GeneratorViewModel::class.java]
 
         _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textGenerator
-        generatorViewModel.text.observe(viewLifecycleOwner, { textView.text = it })
+        generatorViewModel.text.observe(viewLifecycleOwner) { textView.text = it }
 
         return root
     }

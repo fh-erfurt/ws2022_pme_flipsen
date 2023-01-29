@@ -2,70 +2,64 @@ package de.fhe.ai.flipsen.view.ui.entry
 
 import android.app.Activity
 import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.fhe.ai.flipsen.database.local.PasswordDao
+import dagger.hilt.android.lifecycle.HiltViewModel
+import de.fhe.ai.flipsen.database.PasswordRepository
 import de.fhe.ai.flipsen.model.PasswordEntry
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditEntryViewModel @ViewModelInject constructor(
-    private val passwordDao: PasswordDao,
+@HiltViewModel
+class EditEntryViewModel @Inject constructor(
+    private val passwordRepository: PasswordRepository,
     @Assisted private val state : SavedStateHandle
 ) : ViewModel() {
 
     var passwordEntry = state.get<PasswordEntry>("passwordEntry")
         set(value) {
             field = value
-            state.set("passwordEntry", value)
-            state.set("passwordEntryName", value?.name)
-            state.set("passwordEntryUsername", value?.username)
-            state.set("passwordEntryPassword", value?.password)
-            state.set("passwordEntryURL", value?.URL)
+            state["passwordEntry"] = value
         }
 
     var passwordEntryName = state.get<String>("passwordEntryName") ?: passwordEntry?.name ?: ""
         set(value) {
             field = value
-            state.set("passwordEntryName", value)
+            state["passwordEntryName"] = value
         }
 
     var passwordEntryUsername = state.get<String>("passwordEntryUsername") ?: passwordEntry?.username ?: ""
         set(value) {
             field = value
-            state.set("passwordEntryUsername", value)
+            state["passwordEntryUsername"] = value
         }
 
     var passwordEntryPassword = state.get<String>("passwordEntryPassword") ?: passwordEntry?.password ?: ""
         set(value) {
             field = value
-            state.set("passwordEntryPassword", value)
+            state["passwordEntryPassword"] = value
         }
 
     var passwordEntryURL = state.get<String>("passwordEntryURL") ?: passwordEntry?.URL ?: ""
         set(value) {
         field = value
-        state.set("passwordEntryURL", value)
+            state["passwordEntryURL"] = value
         }
-
-    // Group_id, Account_id?
 
     private val editEntryEventChannel = Channel<EditEntryEvent>()
     val editEntryEvent = editEntryEventChannel.receiveAsFlow()
 
-    fun setState(entry: PasswordEntry) {
-        passwordEntryName = entry.name
-        passwordEntryUsername = entry.username
-        passwordEntryPassword = entry.password
-        passwordEntryURL = entry.URL
-    }
-
     fun onSaveClick() {
         if (passwordEntryName.isBlank()) {
             showInvalidInputMessage("Name can not be empty")
+            return
+        }
+
+        if (passwordEntryPassword.isBlank()) {
+            showInvalidInputMessage("Password can not be empty")
             return
         }
 
@@ -79,12 +73,12 @@ class EditEntryViewModel @ViewModelInject constructor(
     }
 
     private fun createPasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        passwordDao.insert(passwordEntry)
+        passwordRepository.insert(passwordEntry)
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(ADD_ENTRY_RESULT_OK))
     }
 
     private fun updatePasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        passwordDao.update(passwordEntry)
+        passwordRepository.update(passwordEntry)
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(EDIT_ENTRY_RESULT_OK))
     }
 

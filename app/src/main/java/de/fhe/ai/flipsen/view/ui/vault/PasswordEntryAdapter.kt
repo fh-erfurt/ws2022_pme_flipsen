@@ -1,10 +1,8 @@
 package de.fhe.ai.flipsen.view.ui.vault
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +14,7 @@ import de.fhe.ai.flipsen.model.PasswordEntry
 class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.PasswordEntryViewHolder>(DiffCallback()) {
 
     var onItemClick: ((PasswordEntry) -> Unit)? = null
+    var onMenuClick: ((AppCompatImageButton, PasswordEntry) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasswordEntryViewHolder {
         val binding = ItemPasswordEntryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +26,10 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
         holder.bind(currentItem)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(getItem(position))
+        }
+        val button = holder.itemView.findViewById<AppCompatImageButton>(R.id.btnMore)
+        button.setOnClickListener {
+            onMenuClick?.invoke(button, getItem(position))
         }
     }
 

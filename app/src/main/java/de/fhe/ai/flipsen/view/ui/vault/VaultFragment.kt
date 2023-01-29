@@ -1,8 +1,8 @@
 package de.fhe.ai.flipsen.view.ui.vault
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +29,6 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
             rvEntries.apply {
                 adapter = passwordEntryAdapter
                 layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
             }
         }
 
@@ -39,6 +38,18 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
 
         passwordEntryAdapter.onItemClick = { entry ->
             navigateToEditFragment(entry)
+        }
+
+        passwordEntryAdapter.onMenuClick = { button, entry ->
+            val popupMenu = PopupMenu(activity, button)
+            popupMenu.menuInflater.inflate(R.menu.entry_popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_delete -> vaultViewModel.deletePasswordEntry(entry)
+                }
+                true
+            }
+            popupMenu.show()
         }
 
         btnEditEntryFragment.setOnClickListener {
@@ -53,10 +64,9 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
             val bundle = Bundle()
             bundle.putParcelable("entry", entry)
             navController.navigate(R.id.navigation_edit_entry, bundle)
-            return;
+            return
         }
 
         navController.navigate(R.id.navigation_edit_entry)
     }
-
 }

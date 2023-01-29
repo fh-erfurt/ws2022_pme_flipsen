@@ -1,7 +1,6 @@
 package de.fhe.ai.flipsen.view.ui.entry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -20,8 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.FragmentEditEntryBinding
 import de.fhe.ai.flipsen.model.PasswordEntry
-import de.fhe.ai.flipsen.view.util.exhaustive
-import kotlin.reflect.typeOf
+import de.fhe.ai.flipsen.view.util.parcelable
 
 @AndroidEntryPoint
 class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
@@ -29,9 +27,13 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
     private val viewModel : EditEntryViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val entry = arguments?.getParcelable<PasswordEntry>("entry")
+        val entry = arguments?.parcelable<PasswordEntry>("entry")
         if (entry != null) {
             viewModel.passwordEntry = entry
+            viewModel.passwordEntryName = entry.name
+            viewModel.passwordEntryURL = entry.URL
+            viewModel.passwordEntryPassword = entry.password
+            viewModel.passwordEntryUsername = entry.username
         }
 
         super.onViewCreated(view, savedInstanceState)
@@ -81,8 +83,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
             viewModel.editEntryEvent.collect { event ->
                 when (event) {
                     is EditEntryViewModel.EditEntryEvent.ShowInvalidInputMessage -> {
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
-                                .show()
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
                     }
                     is EditEntryViewModel.EditEntryEvent.NavigateBackWithResult -> {
                         binding.inputName.clearFocus()
@@ -92,8 +93,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
                         )
                         findNavController().popBackStack()
                     }
-                    else -> {}
-                }.exhaustive
+                }
             }
         }
     }
