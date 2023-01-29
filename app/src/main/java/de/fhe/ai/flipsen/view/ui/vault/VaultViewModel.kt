@@ -5,21 +5,20 @@ import androidx.lifecycle.*
 import de.fhe.ai.flipsen.database.PasswordRepository
 import de.fhe.ai.flipsen.database.local.PasswordDao
 import de.fhe.ai.flipsen.model.PasswordEntry
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.security.PrivateKey
 import javax.inject.Inject
 
 class VaultViewModel @ViewModelInject constructor(
-    private val passwordDao: PasswordDao //TODO("Use repository instead of dao")
+    private val passwordRepository: PasswordRepository
 ): ViewModel() {
-
-    val passwordEntryList = passwordDao.getPasswords(0).asLiveData() //TODO("Implement getAccountId function")
+    val passwordEntryList = passwordRepository.getPasswords(0)
 
     private val _text = MutableLiveData<String>().apply {
         value = "Tresor"
     }
 
     val text: LiveData<String> = _text
-
 }

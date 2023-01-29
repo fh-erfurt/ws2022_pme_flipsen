@@ -1,6 +1,7 @@
 package de.fhe.ai.flipsen.view.ui.entry
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -27,7 +28,6 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.clear()
@@ -37,7 +37,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.btnSave -> {
-                        //TODO("Implement save function")
+                        viewModel.onSaveClick()
                         return true
                     }
                 }

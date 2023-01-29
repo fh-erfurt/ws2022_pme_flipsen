@@ -41,8 +41,6 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
         btnEditEntryFragment.setOnClickListener {
             navController.navigate(R.id.navigation_edit_entry)
         }
-
-        //TODO("Bug: List is not visible on first start, reloading the fragment resolves the issue")
     }
 
 }

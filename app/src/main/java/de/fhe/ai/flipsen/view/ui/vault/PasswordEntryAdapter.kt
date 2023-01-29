@@ -24,6 +24,12 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
     }
 
     class PasswordEntryViewHolder(private val binding: ItemPasswordEntryBinding) : RecyclerView.ViewHolder(binding.root) {
+        /*init {
+            binding.root.setOnClickListener {
+                onItemClick?.ivoke
+            }
+        }*/
+
         fun bind(passwordEntry: PasswordEntry) {
             binding.apply {
                 Picasso.get().load("https://unfair-white-tarantula.faviconkit.com/" + passwordEntry.URL + "/32").placeholder(R.drawable.ic_baseline_autorenew_24)
