@@ -1,6 +1,7 @@
 package de.fhe.ai.flipsen.database.local
 
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import de.fhe.ai.flipsen.dependency_injection.ApplicationScope
 import de.fhe.ai.flipsen.model.Account
