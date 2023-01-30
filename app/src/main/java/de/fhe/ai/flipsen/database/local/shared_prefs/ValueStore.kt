@@ -9,7 +9,6 @@ import javax.inject.Singleton
 @Singleton
 class ValueStore @Inject constructor(@ApplicationContext context : Context){
     val prefs = context.getSharedPreferences("flipsen_store", Context.MODE_PRIVATE)
-    val PREF_TAG = "flipsen_store"
 
     fun getValue(Key : String): Long {
         return prefs.getLong(Key, 0)

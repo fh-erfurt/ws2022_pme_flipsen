@@ -54,9 +54,8 @@ class LoginViewModel @Inject constructor(
             showInvalidInputMessage("Fehlerhafte Zugangsdaten")
             return 3
         }
-        //confirm that account exists
+
         if (accountLoginAccountName == account.accountName && accountLoginMasterPassword == account.masterPassword) {
-            //direct to vault
             sharedPrefs.setValue("accountId",account.id.toLong())
             return -1
         } else {
@@ -73,7 +72,6 @@ class LoginViewModel @Inject constructor(
 
     sealed class LoginEvent {
         data class ShowInvalidInputMessage(val msg: String) : LoginEvent()
-        //data class NavigateBackWithResult(val result: Int) : LoginEvent()
     }
 }
 

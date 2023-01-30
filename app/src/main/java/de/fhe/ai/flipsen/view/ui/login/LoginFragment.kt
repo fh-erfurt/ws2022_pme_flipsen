@@ -60,8 +60,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (loginAccount == -1) {
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
-            } else {
-
             }
         }
 
@@ -72,17 +70,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
                             .show()
                     }
-                    /*
-                    is EditEntryViewModel.EditEntryEvent.NavigateBackWithResult -> {
-                        binding.inputName.clearFocus()
-                        setFragmentResult(
-                            "edit_request",
-                            bundleOf("edit_result" to event.result)
-                        )
-                        findNavController().popBackStack()
-                    }*/
-                    else -> {}
-
                 }
             }
         }

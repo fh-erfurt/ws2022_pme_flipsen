@@ -56,8 +56,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             if (newAccount == -1) {
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
-            } else {
-
             }
         }
 
