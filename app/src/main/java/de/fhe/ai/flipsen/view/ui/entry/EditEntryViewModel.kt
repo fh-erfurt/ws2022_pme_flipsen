@@ -1,7 +1,6 @@
 package de.fhe.ai.flipsen.view.ui.entry
 
 import android.app.Activity
-import androidx.hilt.Assisted
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EditEntryViewModel @Inject constructor(
     private val passwordRepository: PasswordRepository,
-    @Assisted private val state : SavedStateHandle
+     private val state : SavedStateHandle
 ) : ViewModel() {
 
     var passwordEntry = state.get<PasswordEntry>("passwordEntry")
