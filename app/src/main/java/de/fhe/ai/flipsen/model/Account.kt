@@ -11,10 +11,9 @@ data class Account(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
 
-
     // ---- Attributes
-    @ColumnInfo(name = "accountname")
-    var accountname: String = "",
+    @ColumnInfo(name = "account_name")
+    var accountName: String = "",
 
     @ColumnInfo(name = "master_password")
     var masterPassword: String = "",

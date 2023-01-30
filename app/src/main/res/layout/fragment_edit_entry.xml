@@ -60,6 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/neutral_200"
         android:textColorHint="@color/neutral_200"
         app:boxStrokeColor="@color/neutral_200"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +70,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

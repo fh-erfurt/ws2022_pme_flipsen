@@ -32,5 +32,4 @@
         android:name="de.fhe.ai.flipsen.view.ui.entry.EditEntryFragment"
         android:label="Eintrag bearbeiten"
         tools:layout="@layout/fragment_edit_entry" />
-
 </navigation>

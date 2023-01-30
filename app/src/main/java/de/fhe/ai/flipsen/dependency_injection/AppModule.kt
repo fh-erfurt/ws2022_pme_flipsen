@@ -32,6 +32,9 @@ class AppModule {
     @Provides
     fun providePasswordFolderDao(db: PasswordDatabase) = db.passwordFolderDao()
 
+    @Provides
+    fun provideAccountDao(db: PasswordDatabase) = db.accountDao()
+
     @ApplicationScope
     @Provides
     @Singleton
