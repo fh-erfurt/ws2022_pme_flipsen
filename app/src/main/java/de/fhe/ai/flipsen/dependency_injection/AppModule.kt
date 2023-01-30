@@ -22,11 +22,15 @@ class AppModule {
         callback: PasswordDatabase.Callback
     ) = Room.databaseBuilder(app, PasswordDatabase::class.java, "password_database")
         .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
         .addCallback(callback)
         .build()
 
     @Provides
-    fun provideTaskDao(db: PasswordDatabase) = db.passwordDao()
+    fun providePasswordDao(db: PasswordDatabase) = db.passwordDao()
+
+    @Provides
+    fun providePasswordFolderDao(db: PasswordDatabase) = db.passwordFolderDao()
 
     @ApplicationScope
     @Provides

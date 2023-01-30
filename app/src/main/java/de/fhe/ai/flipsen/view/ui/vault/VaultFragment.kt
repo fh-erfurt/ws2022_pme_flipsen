@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.FragmentVaultBinding
 import de.fhe.ai.flipsen.model.PasswordEntry
+import de.fhe.ai.flipsen.model.PasswordFolder
 import kotlinx.android.synthetic.main.fragment_vault.*
 
 @AndroidEntryPoint
@@ -33,7 +34,10 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
         }
 
         vaultViewModel.passwordEntryList.observe(viewLifecycleOwner) {
-            passwordEntryAdapter.submitList(it)
+            passwordEntryAdapter.submitList(
+                it.map { item -> listOf(PasswordEntry(folder = item)) + item.passwordEntries }
+                    .flatten()
+            )
         }
 
         passwordEntryAdapter.onItemClick = { entry ->
@@ -62,7 +66,8 @@ class VaultFragment : Fragment(R.layout.fragment_vault) {
 
         if (entry != null) {
             val bundle = Bundle()
-            bundle.putParcelable("entry", entry)
+            bundle.putParcelable("folder", entry.folder.copy(passwordEntries = listOf()))
+            bundle.putParcelable("entry", entry.copy(folder = PasswordFolder()))
             navController.navigate(R.id.navigation_edit_entry, bundle)
             return
         }

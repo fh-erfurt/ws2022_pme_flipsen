@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.ItemPasswordEntryBinding
 import de.fhe.ai.flipsen.model.PasswordEntry
+import de.fhe.ai.flipsen.model.PasswordFolder
 
 class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.PasswordEntryViewHolder>(DiffCallback()) {
 
@@ -24,24 +25,38 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
     override fun onBindViewHolder(holder: PasswordEntryViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(getItem(position))
+
+        // If entry is a valid password entry add click listeners to it
+        if ( currentItem.name != "") {
+            holder.itemView.setOnClickListener {
+                onItemClick?.invoke(getItem(position))
+            }
+            val button = holder.itemView.findViewById<AppCompatImageButton>(R.id.btnMore)
+            button.setOnClickListener {
+                onMenuClick?.invoke(button, getItem(position))
+            }
         }
-        val button = holder.itemView.findViewById<AppCompatImageButton>(R.id.btnMore)
-        button.setOnClickListener {
-            onMenuClick?.invoke(button, getItem(position))
-        }
+
     }
 
     class PasswordEntryViewHolder(private val binding: ItemPasswordEntryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(passwordEntry: PasswordEntry) {
             binding.apply {
-                Picasso.get().load("https://unfair-white-tarantula.faviconkit.com/" + passwordEntry.URL + "/32").placeholder(R.drawable.ic_baseline_autorenew_24)
-                    .error(R.drawable.ic_baseline_autorenew_24)
-                    .into(icon)
-                name.text = passwordEntry.name
-                username.text = passwordEntry.username
-                btnMore.setImageResource(R.drawable.ic_baseline_more_horiz_24)
+                // If entry is a valid password entry, render it
+                if ( passwordEntry.name != "") {
+                    Picasso.get().load("https://www.google.com/s2/favicons?domain=" + passwordEntry.URL + "&sz=32").placeholder(R.drawable.ic_baseline_autorenew_24)
+                        .error(R.drawable.ic_baseline_autorenew_24)
+                        .into(icon)
+
+                    name.text = passwordEntry.name
+                    username.text = passwordEntry.username
+                    btnMore.setImageResource(R.drawable.ic_baseline_more_horiz_24)
+
+                }
+                // Else it must be a header entry, so just render the folder name
+                else {
+                    folderName.text = passwordEntry.folder.name
+                }
             }
         }
     }
@@ -51,7 +66,7 @@ class PasswordEntryAdapter : ListAdapter<PasswordEntry, PasswordEntryAdapter.Pas
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: PasswordEntry, newItem: PasswordEntry) =
-             oldItem == newItem
+             oldItem.copy(folder = PasswordFolder()) == newItem.copy(folder = PasswordFolder())
     }
 }
 
