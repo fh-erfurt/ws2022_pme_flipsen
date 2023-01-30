@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
 import de.fhe.ai.flipsen.databinding.FragmentEditEntryBinding
 import de.fhe.ai.flipsen.model.PasswordEntry
+import de.fhe.ai.flipsen.model.PasswordFolder
 import de.fhe.ai.flipsen.view.util.parcelable
 
 @AndroidEntryPoint
@@ -28,8 +29,16 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val entry = arguments?.parcelable<PasswordEntry>("entry")
+        val folder = arguments?.parcelable<PasswordFolder>("folder")
+
+        if (folder != null) {
+            viewModel.passwordFolder = folder
+            viewModel.passwordFolderName = folder.name
+        }
+
         if (entry != null) {
             viewModel.passwordEntry = entry
+
             viewModel.passwordEntryName = entry.name
             viewModel.passwordEntryURL = entry.URL
             viewModel.passwordEntryPassword = entry.password
@@ -61,6 +70,7 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
             inputUsername.setText(viewModel.passwordEntryUsername)
             inputPassword.setText(viewModel.passwordEntryPassword)
             inputURL.setText(viewModel.passwordEntryURL)
+            inputFolder.setText(viewModel.passwordFolderName)
 
             inputName.addTextChangedListener {
                 viewModel.passwordEntryName = it.toString()
@@ -76,6 +86,10 @@ class EditEntryFragment : Fragment(R.layout.fragment_edit_entry) {
 
             inputURL.addTextChangedListener {
                 viewModel.passwordEntryURL = it.toString()
+            }
+
+            inputFolder.addTextChangedListener {
+                viewModel.passwordFolderName = it.toString()
             }
         }
 

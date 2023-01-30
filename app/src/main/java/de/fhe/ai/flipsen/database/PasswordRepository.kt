@@ -1,8 +1,6 @@
 package de.fhe.ai.flipsen.database
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import de.fhe.ai.flipsen.database.local.PasswordDao
+import de.fhe.ai.flipsen.database.local.dao.PasswordDao
 import de.fhe.ai.flipsen.model.PasswordEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -10,7 +8,8 @@ import javax.inject.Inject
 
 
 class PasswordRepository @Inject constructor(
-    private val passwordDao : PasswordDao) {
+    private val passwordDao : PasswordDao
+) {
 
     suspend fun insert(passwordEntry : PasswordEntry) {
         withContext(Dispatchers.IO) {
@@ -28,10 +27,6 @@ class PasswordRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             passwordDao.delete(passwordEntry)
         }
-    }
-
-     fun getPasswords(accountId : Int) : LiveData<List<PasswordEntry>> {
-        return passwordDao.getPasswords(accountId).asLiveData()
     }
 }
 

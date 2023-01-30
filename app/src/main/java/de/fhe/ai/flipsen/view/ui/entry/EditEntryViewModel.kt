@@ -5,8 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.fhe.ai.flipsen.database.PasswordFolderRepository
 import de.fhe.ai.flipsen.database.PasswordRepository
 import de.fhe.ai.flipsen.model.PasswordEntry
+import de.fhe.ai.flipsen.model.PasswordFolder
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -15,8 +17,21 @@ import javax.inject.Inject
 @HiltViewModel
 class EditEntryViewModel @Inject constructor(
     private val passwordRepository: PasswordRepository,
-     private val state : SavedStateHandle
+    private val folderRepository: PasswordFolderRepository,
+    private val state : SavedStateHandle
 ) : ViewModel() {
+
+    var passwordFolder = state.get<PasswordFolder>("passwordFolder")
+        set(value) {
+            field = value
+            state["passwordFolder"] = value
+        }
+
+    var passwordFolderName = state.get<String>("passwordFolderName") ?: passwordFolder?.name ?: "Unsortiert"
+        set(value) {
+            field = value
+            state["passwordFolderName"] = value
+        }
 
     var passwordEntry = state.get<PasswordEntry>("passwordEntry")
         set(value) {
@@ -63,21 +78,43 @@ class EditEntryViewModel @Inject constructor(
         }
 
         if (passwordEntry != null) {
-            val updatedPasswordEntry = passwordEntry!!.copy(name = passwordEntryName, username = passwordEntryUsername, password = passwordEntryPassword, URL = passwordEntryURL)
+            val updatedPasswordEntry = passwordEntry!!.copy(
+                name = passwordEntryName,
+                username = passwordEntryUsername,
+                password = passwordEntryPassword,
+                URL = passwordEntryURL
+            )
             updatePasswordEntry(updatedPasswordEntry)
         } else {
-            val newPasswordEntry = PasswordEntry(name = passwordEntryName, username = passwordEntryUsername, password = passwordEntryPassword, URL = passwordEntryURL)
+            val newPasswordEntry = PasswordEntry(
+                name = passwordEntryName,
+                username = passwordEntryUsername,
+                password = passwordEntryPassword,
+                URL = passwordEntryURL
+            )
             createPasswordEntry(newPasswordEntry)
         }
     }
 
     private fun createPasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        passwordRepository.insert(passwordEntry)
+        val folder = folderRepository.getFolderByName(1, passwordFolderName)
+
+        if (folder == null) {
+            folderRepository.insert(PasswordFolder(accountId = 1, name = passwordFolderName))
+        }
+
+        val newFolder = folderRepository.getFolderByName(1, passwordFolderName)!!
+        passwordRepository.insert(passwordEntry.copy(folderId = newFolder.id))
+
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(ADD_ENTRY_RESULT_OK))
     }
 
     private fun updatePasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        passwordRepository.update(passwordEntry)
+        val folder = folderRepository.getFolderByName(1, passwordFolderName)
+        if (folder == null) folderRepository.insert(PasswordFolder(accountId = 1, name = passwordFolderName))
+        val newFolder = folderRepository.getFolderByName(1, passwordFolderName)!!
+
+        passwordRepository.update(passwordEntry.copy(folderId = newFolder.id))
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(EDIT_ENTRY_RESULT_OK))
     }
 

@@ -6,26 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.vault.VaultFragment">
 
-    <TextView
-        android:id="@+id/textFolder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/folder"
-        android:textColor="@color/primary_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textUnsorted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/unsorted"
-        android:textColor="@color/primary_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textFolder" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnEditEntryFragment"
         android:layout_width="wrap_content"
@@ -42,5 +22,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/textUnsorted" />
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
