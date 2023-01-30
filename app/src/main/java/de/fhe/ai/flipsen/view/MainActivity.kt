@@ -1,5 +1,6 @@
 package de.fhe.ai.flipsen.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,13 +15,18 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.R
+import de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore
 import de.fhe.ai.flipsen.databinding.ActivityMainBinding
+import de.fhe.ai.flipsen.view.ui.login.LoginActivity
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController : NavController
+    @Inject
+    lateinit var sharedPrefs : ValueStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +59,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.search -> {
-                Toast.makeText(this, "Not implemented yet...", Toast.LENGTH_LONG).show()
-                return true
+                sharedPrefs.setValue("accountId",0)
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

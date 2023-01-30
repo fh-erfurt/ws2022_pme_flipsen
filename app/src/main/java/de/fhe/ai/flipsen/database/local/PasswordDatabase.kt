@@ -3,6 +3,7 @@ package de.fhe.ai.flipsen.database.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import de.fhe.ai.flipsen.database.local.dao.AccountDao
 import de.fhe.ai.flipsen.database.local.dao.PasswordDao
 import de.fhe.ai.flipsen.database.local.dao.PasswordFolderDao
 import de.fhe.ai.flipsen.dependency_injection.ApplicationScope
@@ -20,6 +21,8 @@ abstract class PasswordDatabase : RoomDatabase() {
     abstract fun passwordDao(): PasswordDao
     abstract fun passwordFolderDao(): PasswordFolderDao
 
+    abstract fun accountDao(): AccountDao
+
     class Callback @Inject constructor(
         private val database: Provider<PasswordDatabase>,
         @ApplicationScope private val applicationScope: CoroutineScope
@@ -30,15 +33,18 @@ abstract class PasswordDatabase : RoomDatabase() {
             applicationScope.launch {
                 seedDatabase(
                     passwordDao = database.get().passwordDao(),
-                    passwordFolderDao = database.get().passwordFolderDao()
+                    passwordFolderDao = database.get().passwordFolderDao(),
+                    accountDao = database.get().accountDao()
                 )
             }
         }
     }
 }
 
-suspend fun seedDatabase(passwordDao: PasswordDao, passwordFolderDao: PasswordFolderDao) {
+suspend fun seedDatabase(passwordDao: PasswordDao, passwordFolderDao: PasswordFolderDao,accountDao: AccountDao) {
     // First User
+    accountDao.insert(Account( id = 1, accountName = "lanabanana@test.de", masterPassword = "flutteristbesser"))
+
     passwordFolderDao.insert(PasswordFolder(id = 1, name = "Entertainment", accountId = 1))
     passwordFolderDao.insert(PasswordFolder(id = 2, name = "Development", accountId = 1))
     passwordFolderDao.insert(PasswordFolder(id = 3, name = "Banking", accountId = 1))
@@ -48,7 +54,9 @@ suspend fun seedDatabase(passwordDao: PasswordDao, passwordFolderDao: PasswordFo
     passwordDao.insert(PasswordEntry(id = 3, name = "Google",  username = "maxi.dev@test.de", password = "9jJo4jNi259dmfdjDde", URL = "google.com", folderId = 2))
     passwordDao.insert(PasswordEntry(id = 4, name = "Paypal",  username = "maxmustermann@test.de", password = "Meinhardt123", URL = "paypal.com", folderId = 3))
 
-    // Second USer
+    // Second User
+    accountDao.insert(Account( id = 2, accountName = "maxmustermann@test.de", masterPassword = "flutteristcooler"))
+
     passwordFolderDao.insert(PasswordFolder(id = 4, name = "General", accountId = 2))
 
     passwordDao.insert(PasswordEntry(id = 5, name = "Moodle",  username = "fhler@fh-erfurt.de", password = "FlutterIstBesser", URL = "moodle.fh-erfurt.de", folderId = 4))

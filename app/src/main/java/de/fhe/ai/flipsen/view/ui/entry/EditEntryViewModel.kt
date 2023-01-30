@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.fhe.ai.flipsen.database.PasswordFolderRepository
 import de.fhe.ai.flipsen.database.PasswordRepository
+import de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore
 import de.fhe.ai.flipsen.model.PasswordEntry
 import de.fhe.ai.flipsen.model.PasswordFolder
 import kotlinx.coroutines.channels.Channel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class EditEntryViewModel @Inject constructor(
     private val passwordRepository: PasswordRepository,
     private val folderRepository: PasswordFolderRepository,
+    private val sharedPrefs: ValueStore,
     private val state : SavedStateHandle
 ) : ViewModel() {
 
@@ -96,23 +98,24 @@ class EditEntryViewModel @Inject constructor(
         }
     }
 
+    val accountId = sharedPrefs.getValue("accountId")
     private fun createPasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        val folder = folderRepository.getFolderByName(1, passwordFolderName)
+        val folder = folderRepository.getFolderByName(accountId, passwordFolderName)
 
         if (folder == null) {
-            folderRepository.insert(PasswordFolder(accountId = 1, name = passwordFolderName))
+            folderRepository.insert(PasswordFolder(accountId = accountId.toInt(), name = passwordFolderName))
         }
 
-        val newFolder = folderRepository.getFolderByName(1, passwordFolderName)!!
+        val newFolder = folderRepository.getFolderByName(accountId, passwordFolderName)!!
         passwordRepository.insert(passwordEntry.copy(folderId = newFolder.id))
 
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(ADD_ENTRY_RESULT_OK))
     }
 
     private fun updatePasswordEntry(passwordEntry: PasswordEntry) = viewModelScope.launch {
-        val folder = folderRepository.getFolderByName(1, passwordFolderName)
-        if (folder == null) folderRepository.insert(PasswordFolder(accountId = 1, name = passwordFolderName))
-        val newFolder = folderRepository.getFolderByName(1, passwordFolderName)!!
+        val folder = folderRepository.getFolderByName(accountId, passwordFolderName)
+        if (folder == null) folderRepository.insert(PasswordFolder(sharedPrefs.getValue("accountId"), name = passwordFolderName))
+        val newFolder = folderRepository.getFolderByName(accountId, passwordFolderName)!!
 
         passwordRepository.update(passwordEntry.copy(folderId = newFolder.id))
         editEntryEventChannel.send(EditEntryEvent.NavigateBackWithResult(EDIT_ENTRY_RESULT_OK))
