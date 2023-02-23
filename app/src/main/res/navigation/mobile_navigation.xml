@@ -21,15 +21,44 @@
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" />
 
+    <!--Navigation for SettingsFragment to SettingsChangeEmailFragment and SettingsChangePasswordFragment -->
     <fragment
         android:id="@+id/navigation_settings"
         android:name="de.fhe.ai.flipsen.view.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_settings_change_password"
+            app:destination="@id/navigation_settings_change_password" />
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_settings_change_email"
+            app:destination="@id/navigation_settings_change_email" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_edit_entry"
         android:name="de.fhe.ai.flipsen.view.ui.entry.EditEntryFragment"
         android:label="Eintrag bearbeiten"
         tools:layout="@layout/fragment_edit_entry" />
+
+    <fragment
+        android:id="@+id/navigation_settings_change_email"
+        android:name="de.fhe.ai.flipsen.view.ui.settings.SettingsChangeEmailFragment"
+        android:label="@string/change_email"
+        tools:layout="@layout/fragment_settings_change_email" >
+        <action
+            android:id="@+id/action_navigation_settings_change_email_to_navigation_vault"
+            app:destination="@id/navigation_vault" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings_change_password"
+        android:name="de.fhe.ai.flipsen.view.ui.settings.SettingsChangePasswordFragment"
+        android:label="@string/change_password"
+        tools:layout="@layout/fragment_settings_change_password" >
+        <action
+            android:id="@+id/action_navigation_settings_change_password_to_navigation_vault"
+            app:destination="@id/navigation_vault" />
+    </fragment>
+
 </navigation>

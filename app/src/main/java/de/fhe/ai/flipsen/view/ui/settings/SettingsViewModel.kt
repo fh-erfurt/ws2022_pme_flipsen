@@ -11,3 +11,6 @@ class SettingsViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 }
+
+
+// evtl nochmal anschauen und durch lokale datei ersetzen
