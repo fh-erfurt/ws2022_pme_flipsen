@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral_800"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".view.ui.settings.SettingsFragment">
 
     <!-- <RelativeLayout
@@ -120,7 +120,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
                 <RelativeLayout
@@ -277,7 +277,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
                 <RelativeLayout
