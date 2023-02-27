@@ -9,10 +9,10 @@ import javax.inject.Singleton
 class ValueStore @Inject constructor(@ApplicationContext context : Context){
     val prefs = context.getSharedPreferences("flipsen_store", Context.MODE_PRIVATE)
 
-    fun getValue(Key : String) : Long {
+    fun getValue(Key: String): Long {
         return prefs.getLong(Key, 0)
     }
-    fun setValue(Key: String, Value : Long) {
+    fun setValue(Key: String, Value: Long) {
         prefs.edit().putLong(Key, Value).apply()
     }
 }

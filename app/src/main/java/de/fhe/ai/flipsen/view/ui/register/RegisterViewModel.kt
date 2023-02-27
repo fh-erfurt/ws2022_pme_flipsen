@@ -16,7 +16,6 @@ class RegisterViewModel @Inject constructor(
     private val accountDao: AccountDao,
     private val sharedPrefs: ValueStore,
     private val state : SavedStateHandle
-
 ) : ViewModel() {
 
     val accountRegister = state.get<Account>("account")
