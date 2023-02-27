@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import de.fhe.ai.flipsen.R
-import de.fhe.ai.flipsen.database.local.AccountDao
 import de.fhe.ai.flipsen.database.local.PasswordDatabase
 import de.fhe.ai.flipsen.database.local.dao.AccountDao
 
@@ -30,7 +29,7 @@ class SettingsChangePasswordFragment : Fragment(R.layout.fragment_settings_chang
 
 
     private lateinit var accountDao: AccountDao
-    private lateinit var sharedPreferences: de.fhe.ai.flipsen.database.local.SharedPreferences
+    private lateinit var sharedPrefs: de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,7 @@ class SettingsChangePasswordFragment : Fragment(R.layout.fragment_settings_chang
         val db = Room.databaseBuilder(requireContext(), PasswordDatabase::class.java, "flipsen_db")
             .build()
         accountDao = db.passwordDao()
-        sharedPreferences = de.fhe.ai.flipsen.database.local.SharedPreferences(requireContext())
+        sharedPrefs = de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore(requireContext())
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +50,7 @@ class SettingsChangePasswordFragment : Fragment(R.layout.fragment_settings_chang
         val handler = Handler(Looper.getMainLooper())
         val navController = findNavController()
 
-        val accountId = accountDao.getIdFromAccount(sharedPreferences.getAccountName())
+        val currentAccount = accountDao.getAccountById(sharedPrefs.getValue("accountId"))
 
         button.setOnClickListener {
             val newMasterPassword: String = editTextNewMasterPassword.text.toString()
@@ -60,8 +59,8 @@ class SettingsChangePasswordFragment : Fragment(R.layout.fragment_settings_chang
             //update database and SharedPreferences
             //give out message : password changed successfully and go back to settings
             if (newMasterPassword == newMasterPasswordConfirmation){
-                accountDao.updateMasterPassword(newMasterPasswordConfirmation, accountId)
-                sharedPreferences.saveMasterPassword(newMasterPasswordConfirmation)
+                accountDao.updateMasterPassword(newMasterPasswordConfirmation, currentAccount.id)
+               //sharedPreferences.saveMasterPassword(newMasterPasswordConfirmation)
                 Toast.makeText(requireContext(), "Passwort wurde erfolgreich geändert! Sie werden zu den Einstellungen zurückgebracht", Toast.LENGTH_SHORT).show()
                 //redirects user to settings after 2000 milliseconds, so 2 seconds
                 handler.postDelayed({

@@ -22,6 +22,9 @@ interface AccountDao {
     @Query("SELECT id FROM account WHERE account_name = :accountName")
     fun getIdFromAccount(accountName: String): Int
 
+    @Query("SELECT * FROM account WHERE id = :id")
+    fun getAccountById(id: Long): Account
+
     //Überflüssig?
     @Query("UPDATE account SET account_name = :newAccountName WHERE id = :id")
     fun updateAccountName(newAccountName: String, id: Int)

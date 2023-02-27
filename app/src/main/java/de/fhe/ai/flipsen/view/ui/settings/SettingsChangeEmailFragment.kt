@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import de.fhe.ai.flipsen.R
-import de.fhe.ai.flipsen.database.local.AccountDao
 import de.fhe.ai.flipsen.database.local.PasswordDatabase
 import de.fhe.ai.flipsen.database.local.dao.AccountDao
 
@@ -30,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
 class SettingsChangeEmailFragment : Fragment(R.layout.fragment_settings_change_email) {
 
     private lateinit var accountDao: AccountDao
-    private lateinit var sharedPreferences: de.fhe.ai.flipsen.database.local.SharedPreferences
+    private lateinit var sharedPrefs: de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,7 @@ class SettingsChangeEmailFragment : Fragment(R.layout.fragment_settings_change_e
         val db = Room.databaseBuilder(requireContext(), PasswordDatabase::class.java, "flipsen_db")
             .build()
         accountDao = db.passwordDao()
-        sharedPreferences = de.fhe.ai.flipsen.database.local.SharedPreferences(requireContext())
+        sharedPrefs = de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore(requireContext())
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +49,7 @@ class SettingsChangeEmailFragment : Fragment(R.layout.fragment_settings_change_e
         val handler = Handler(Looper.getMainLooper())
         val navController = findNavController()
 
-        val accountId = accountDao.getIdFromAccount(sharedPreferences.getAccountName())
+        val currentAccount = accountDao.getAccountById(sharedPrefs.getValue("accountId"))
 
         button.setOnClickListener {
             val newEmail: String = editTextNewEmail.text.toString()
@@ -59,8 +58,8 @@ class SettingsChangeEmailFragment : Fragment(R.layout.fragment_settings_change_e
             //update database and SharedPreferences
             //give out message : account name(email) changed successfully and go back to settings
             if (newEmail == newEmailConfirmation){
-                accountDao.updateAccountName(newEmailConfirmation, accountId)
-                sharedPreferences.saveAccountName(newEmailConfirmation)
+                accountDao.updateAccountName(newEmailConfirmation, currentAccount.id)
+                //sharedPreferences.saveAccountName(newEmailConfirmation)
                 Toast.makeText(requireContext(), "Email-Adresse wurde erfolgreich geändert! Sie werden zu den Einstellungen zurückgebracht", Toast.LENGTH_SHORT).show()
                 //redirects user to settings after 2000 milliseconds, so 2 seconds
                 handler.postDelayed({
