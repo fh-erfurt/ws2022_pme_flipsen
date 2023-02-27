@@ -3,9 +3,7 @@ package de.fhe.ai.flipsen.view.ui.login
 import android.content.Intent
 import de.fhe.ai.flipsen.R
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
@@ -14,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.room.util.newStringBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import de.fhe.ai.flipsen.databinding.FragmentRegisterBinding

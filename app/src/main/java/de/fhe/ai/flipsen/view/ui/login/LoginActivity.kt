@@ -1,8 +1,7 @@
 package de.fhe.ai.flipsen.view.ui.login
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -27,13 +26,5 @@ class LoginActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_login) as NavHostFragment
         navController = navHostFragment.navController
-
-        /*
-        val btnLogin = findViewById<Button>(R.id.button_login)
-        btnLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-         */
     }
 }
