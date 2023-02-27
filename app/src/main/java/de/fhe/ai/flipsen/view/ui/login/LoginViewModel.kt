@@ -1,9 +1,5 @@
 package de.fhe.ai.flipsen.view.ui.login
 
-import android.app.Activity
-import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.fhe.ai.flipsen.database.local.dao.AccountDao
@@ -56,7 +52,7 @@ class LoginViewModel @Inject constructor(
         }
 
         if (accountLoginAccountName == account.accountName && accountLoginMasterPassword == account.masterPassword) {
-            sharedPrefs.setValue("accountId",account.id.toLong())
+            sharedPrefs.setValue("accountId",account.id)
             return -1
         } else {
             showInvalidInputMessage("Fehlerhafte Zugangsdaten")

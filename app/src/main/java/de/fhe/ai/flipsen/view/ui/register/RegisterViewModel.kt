@@ -1,11 +1,10 @@
 package de.fhe.ai.flipsen.view.ui.login
 
 import android.app.Activity
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.fhe.ai.flipsen.database.local.dao.AccountDao
+import de.fhe.ai.flipsen.database.local.shared_prefs.ValueStore
 import de.fhe.ai.flipsen.model.Account
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -15,7 +14,9 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val accountDao: AccountDao,
+    private val sharedPrefs: ValueStore,
     private val state : SavedStateHandle
+
 ) : ViewModel() {
 
     val accountRegister = state.get<Account>("account")
@@ -53,6 +54,9 @@ class RegisterViewModel @Inject constructor(
         } else {
             val newRegisteredAccount = Account(accountName = accountRegisterAccountName, masterPassword = accountRegisterMasterPassword)
             createNewAccount(newRegisteredAccount)
+
+            sharedPrefs.setValue("accountId",newRegisteredAccount.id)
+
             return -1
         }
     }

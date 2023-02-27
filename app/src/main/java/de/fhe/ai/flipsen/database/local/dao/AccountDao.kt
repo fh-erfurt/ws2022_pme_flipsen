@@ -30,12 +30,6 @@ interface AccountDao {
     @Query("UPDATE account SET master_password = :newMasterPassword WHERE id = :id")
     fun updateMasterPassword(newMasterPassword: String, id: Int)
 
-    //for login purposes
-    //comparison of input data and database
-    @Query("SELECT * FROM account WHERE account_name = :accountName AND master_password = :masterPassword")
-    fun loginAccount(accountName: String, masterPassword: String): Account
-
-    //get account name to prevent someone from trying to register with an already existing accountname
     @Query("SELECT * FROM account WHERE account_name =:accountName")
     fun getAccountByAccountName(accountName: String): Account?
 
