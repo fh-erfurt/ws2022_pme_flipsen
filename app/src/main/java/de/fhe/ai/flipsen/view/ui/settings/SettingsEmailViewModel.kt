@@ -1,6 +1,5 @@
 package de.fhe.ai.flipsen.view.ui.settings
 
-import android.app.Activity
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.fhe.ai.flipsen.database.local.dao.AccountDao
