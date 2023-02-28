@@ -8,27 +8,6 @@
     android:orientation="vertical"
     tools:context=".view.ui.settings.SettingsFragment">
 
-    <!-- <RelativeLayout
-    android:background="@color/neutral_500"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/back_btn"
-        android:padding="14dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Einstellungen"
-        android:layout_centerInParent="true"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
-    </RelativeLayout> -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -48,15 +27,15 @@
 
 
             <TextView
+                android:id="@+id/profile_name_shown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
-                android:text="@string/profile"
+                android:text="@string/profile_show"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
-
 
             <!--Email ändern-->
             <LinearLayout
@@ -100,6 +79,13 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"/>
 
+                    <Button
+                        android:id="@+id/btnChangeEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent">
+                    </Button>
+
                 </RelativeLayout>
             </LinearLayout>
 
@@ -110,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -145,137 +131,16 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"/>
 
-                </RelativeLayout>
-            </LinearLayout>
-
-            <!-- Benutzer wechseln-->
-            <LinearLayout
-                android:background="@drawable/round_rectangle_for_bars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/userSwitchIcon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/account_switch"
-                        android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"
-                        app:tint="#808080"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:text="@string/change_user"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/userSwitchIcon"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <Button
+                        android:id="@+id/btnChangePassword"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/settings_right_arrow_icon"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
+                        android:background="@android:color/transparent">
+                    </Button>
 
                 </RelativeLayout>
             </LinearLayout>
 
-            <!-- Account löschen-->
-            <LinearLayout
-                android:background="@drawable/round_rectangle_for_bars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/settingsDeleteAccount"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/delete_sweep"
-                        android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"
-                        app:tint="#808080"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:text="@string/delete_account"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/settingsDeleteAccount"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/settings_right_arrow_icon"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        app:tint="#808080"/>
-
-                </RelativeLayout>
-            </LinearLayout>
-
-            <!--Logout-->
-            <LinearLayout
-                android:background="@drawable/round_rectangle_for_bars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/settingsLogoutIcon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/logout_variant"
-                        android:background="@drawable/round_rectangle_background_white"
-                        android:padding="12sp"
-                        app:tint="#808080"/>
-
-                    <TextView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:text="@string/logout"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/settingsLogoutIcon"/>
-                </RelativeLayout>
-            </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
