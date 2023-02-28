@@ -5,7 +5,7 @@ import de.fhe.ai.flipsen.model.Account
 import de.fhe.ai.flipsen.model.PasswordEntry
 
 @Dao
-interface PasswordDao : AccountDao {
+interface PasswordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(passwordEntry: PasswordEntry)
 
@@ -14,7 +14,4 @@ interface PasswordDao : AccountDao {
 
     @Delete
     suspend fun delete(passwordEntry: PasswordEntry)
-    override fun insert(account: Account) {
-        TODO("Not yet implemented")
-    }
 }

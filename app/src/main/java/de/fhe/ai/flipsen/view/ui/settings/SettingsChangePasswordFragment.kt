@@ -72,7 +72,6 @@ class SettingsChangePasswordFragment : Fragment(R.layout.fragment_settings_chang
                             .show()
                     }
                     is SettingsPasswordViewModel.SettingsEvent.NavigateBackWithResult -> {
-                        //binding.inputName.clearFocus()
                         setFragmentResult(
                             "edit_request",
                             bundleOf("edit_result" to event.result)

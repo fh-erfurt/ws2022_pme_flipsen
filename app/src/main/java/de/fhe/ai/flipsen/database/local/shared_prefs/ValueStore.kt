@@ -16,5 +16,4 @@ class ValueStore @Inject constructor(@ApplicationContext context : Context){
     fun setValue(Key: String, Value : Long) {
         prefs.edit().putLong(Key, Value).apply()
     }
-
 }

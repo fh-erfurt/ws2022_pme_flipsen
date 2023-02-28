@@ -21,7 +21,6 @@
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" />
 
-    <!--Navigation for SettingsFragment to SettingsChangeEmailFragment and SettingsChangePasswordFragment -->
     <fragment
         android:id="@+id/navigation_settings"
         android:name="de.fhe.ai.flipsen.view.ui.settings.SettingsFragment"

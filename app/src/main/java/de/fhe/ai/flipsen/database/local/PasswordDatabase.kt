@@ -60,5 +60,4 @@ suspend fun seedDatabase(passwordDao: PasswordDao, passwordFolderDao: PasswordFo
     passwordFolderDao.insert(PasswordFolder(id = 4, name = "General", accountId = 2))
 
     passwordDao.insert(PasswordEntry(id = 5, name = "Moodle",  username = "fhler@fh-erfurt.de", password = "FlutterIstBesser", URL = "moodle.fh-erfurt.de", folderId = 4))
-
 }

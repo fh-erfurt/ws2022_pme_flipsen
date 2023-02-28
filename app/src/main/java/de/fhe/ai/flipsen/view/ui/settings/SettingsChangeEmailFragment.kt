@@ -69,7 +69,6 @@ class SettingsChangeEmailFragment : Fragment(R.layout.fragment_settings_change_e
                             .show()
                     }
                     is SettingsEmailViewModel.SettingsEvent.NavigateBackWithResult -> {
-                        //binding.inputName.clearFocus()
                         setFragmentResult(
                             "edit_request",
                             bundleOf("edit_result" to event.result)
