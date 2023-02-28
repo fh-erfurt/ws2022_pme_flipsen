@@ -1,7 +1,6 @@
 package de.fhe.ai.flipsen.database.local.dao
 
 import androidx.room.*
-import de.fhe.ai.flipsen.model.Account
 import de.fhe.ai.flipsen.model.PasswordEntry
 
 @Dao
