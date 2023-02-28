@@ -2,7 +2,6 @@ package de.fhe.ai.flipsen.database.local.dao
 
 import androidx.room.*
 import de.fhe.ai.flipsen.model.Account
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AccountDao {
@@ -27,11 +26,11 @@ interface AccountDao {
 
     //Überflüssig?
     @Query("UPDATE account SET account_name = :newAccountName WHERE id = :id")
-    fun updateAccountName(newAccountName: String, id: Int)
+    fun updateAccountName(newAccountName: String, id: Long)
 
     //Überflüssig?
     @Query("UPDATE account SET master_password = :newMasterPassword WHERE id = :id")
-    fun updateMasterPassword(newMasterPassword: String, id: Int)
+    fun updateMasterPassword(newMasterPassword: String, id: Long)
 
     @Query("SELECT * FROM account WHERE account_name =:accountName")
     fun getAccountByAccountName(accountName: String): Account?
